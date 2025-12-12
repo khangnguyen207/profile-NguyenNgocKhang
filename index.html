@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nguyễn Ngọc Khang | Portfolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            black: '#050505',
+                            dark: '#0a0b1e',
+                            blue: '#00f3ff',
+                            purple: '#bc13fe',
+                            dim: 'rgba(0, 243, 255, 0.1)',
+                        }
+                    },
+                    fontFamily: {
+                        orbitron: ['Orbitron', 'sans-serif'],
+                        rajdhani: ['Rajdhani', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'city-pattern': "url('https://images.unsplash.com/photo-1605218427306-635ba74c9b3f?q=80&w=2069&auto=format&fit=crop')",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050505; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00f3ff; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #bc13fe; 
+        }
+
+        body {
+            background-color: #050505;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        /* Neon Glow Effects */
+        .text-glow {
+            text-shadow: 0 0 10px #00f3ff, 0 0 20px #00f3ff;
+        }
+        .box-glow {
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3), inset 0 0 10px rgba(0, 243, 255, 0.1);
+        }
+        .box-glow-hover:hover {
+            box-shadow: 0 0 25px rgba(0, 243, 255, 0.6), inset 0 0 15px rgba(0, 243, 255, 0.2);
+            border-color: #00f3ff;
+        }
+
+        /* Glitch Effect Keyframes */
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+        .glitch-hover:hover {
+            animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+            color: #bc13fe;
+        }
+
+        /* Glassmorphism Panel */
+        .cyber-glass {
+            background: rgba(10, 11, 30, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+        }
+
+        /* Grid Background Overlay */
+        .grid-overlay {
+            background-image: 
+                linear-gradient(rgba(0, 243, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 243, 255, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%);
+        }
+
+        /* Cut corners for Cyberpunk feel */
+        .clip-corner {
+            clip-path: polygon(
+                10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%
+            );
+        }
+
+        /* Avatar Pulsing */
+        @keyframes pulse-border {
+            0% { box-shadow: 0 0 0 0 rgba(0, 243, 255, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 243, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 243, 255, 0); }
+        }
+        .avatar-pulse {
+            animation: pulse-border 2s infinite;
+        }
+
+        /* Section Transition */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="font-rajdhani selection:bg-cyber-blue selection:text-black">
+
+    <!-- Fixed Background -->
+    <div class="fixed inset-0 z-[-2] bg-city-pattern bg-cover bg-center bg-no-repeat opacity-40"></div>
+    <div class="fixed inset-0 z-[-1] bg-gradient-to-b from-transparent via-cyber-black/80 to-cyber-black"></div>
+    <div class="fixed inset-0 z-[-1] grid-overlay pointer-events-none"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 cyber-glass border-b border-cyber-blue/20">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="font-orbitron text-2xl font-bold text-cyber-blue tracking-widest cursor-pointer hover:text-white transition-colors">
+                NNK<span class="text-cyber-purple">.dev</span>
+            </div>
+            <ul class="hidden md:flex space-x-8 font-semibold text-lg tracking-wide">
+                <li><a href="#about" class="hover:text-cyber-blue transition-colors duration-300">Giới Thiệu</a></li>
+                <li><a href="#strengths" class="hover:text-cyber-blue transition-colors duration-300">Sức Mạnh</a></li>
+                <li><a href="#certificates" class="hover:text-cyber-blue transition-colors duration-300">Thành Tựu</a></li>
+                <li><a href="#growth" class="hover:text-cyber-blue transition-colors duration-300">Phát Triển</a></li>
+            </ul>
+            <a href="#contact" class="hidden md:block px-6 py-2 border border-cyber-blue text-cyber-blue hover:bg-cyber-blue hover:text-black font-bold transition-all duration-300 clip-corner">
+                LIÊN HỆ
+            </a>
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-cyber-blue text-2xl" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-cyber-black/95 absolute w-full border-b border-cyber-blue/30">
+            <div class="flex flex-col p-4 space-y-4 text-center">
+                <a href="#about" class="block py-2 hover:text-cyber-blue">Giới Thiệu</a>
+                <a href="#strengths" class="block py-2 hover:text-cyber-blue">Sức Mạnh</a>
+                <a href="#certificates" class="block py-2 hover:text-cyber-blue">Thành Tựu</a>
+                <a href="#growth" class="block py-2 hover:text-cyber-blue">Phát Triển</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center pt-20 relative overflow-hidden">
+        <div class="absolute top-1/4 left-10 w-24 h-24 border-t-2 border-l-2 border-cyber-blue opacity-50"></div>
+        <div class="absolute bottom-1/4 right-10 w-24 h-24 border-b-2 border-r-2 border-cyber-purple opacity-50"></div>
+
+        <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <div class="order-2 md:order-1 text-center md:text-left z-10">
+                <p class="text-cyber-blue font-orbitron tracking-[0.2em] mb-4 animate-pulse">SYSTEM ONLINE // FRESHMAN</p>
+                <h1 class="text-5xl md:text-7xl font-bold font-orbitron mb-2 leading-tight">
+                    NGUYỄN <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-blue to-white glitch-hover inline-block">NGỌC KHANG</span>
+                </h1>
+                <h2 class="text-2xl text-gray-400 mb-6 font-medium">Sinh viên PTIT | Học viện Công Nghệ Bưu Chính Viễn Thông</h2>
+                <p class="text-gray-300 text-lg mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed border-l-4 border-cyber-purple pl-4">
+                    "Tư duy logic là vũ khí, code là ngôn ngữ. Tôi đang xây dựng tương lai từng dòng lệnh một."
+                </p>
+                <div class="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
+                    <button onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})" class="px-8 py-3 bg-cyber-blue text-black font-bold font-orbitron hover:bg-white hover:scale-105 transition-all clip-corner">
+                        XEM PROFILE
+                    </button>
+                    <button class="px-8 py-3 border border-gray-500 text-gray-300 font-bold font-orbitron hover:border-cyber-purple hover:text-cyber-purple hover:scale-105 transition-all clip-corner">
+                        TẢI CV
+                    </button>
+                </div>
+            </div>
+            
+            <div class="order-1 md:order-2 flex justify-center relative">
+                <!-- Decorative Circles behind Avatar -->
+                <div class="absolute w-[300px] h-[300px] border border-cyber-blue/30 rounded-full animate-[spin_10s_linear_infinite]"></div>
+                <div class="absolute w-[320px] h-[320px] border border-dashed border-cyber-purple/30 rounded-full animate-[spin_15s_linear_infinite_reverse]"></div>
+                
+                <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-cyber-blue avatar-pulse shadow-[0_0_50px_rgba(0,243,255,0.3)] bg-gray-900">
+                    <!-- Placeholder Avatar -->
+                    <img src="D:\VS_code\portfolio\avatar.png" alt="Nguyễn Ngọc Khang" class="w-full h-full object-cover">
+                    <!-- Tech overlay on avatar -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-cyber-black/80 to-transparent pointer-events-none"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
+            <span class="text-xs tracking-widest text-cyber-blue mb-2">SCROLL DOWN</span>
+            <i class="fas fa-chevron-down text-cyber-blue"></i>
+        </div>
+    </section>
+
+    <!-- Strengths Section -->
+    <section id="strengths" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center mb-16 reveal">
+                <span class="w-12 h-1 bg-cyber-blue mr-4"></span>
+                <h2 class="text-3xl md:text-4xl font-orbitron font-bold text-white">ĐIỂM MẠNH <span class="text-cyber-purple text-xl">// CORE STRENGTHS</span></h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Item 1 -->
+                <div class="cyber-glass p-8 rounded-xl border border-gray-800 hover:border-cyber-blue transition-all duration-300 group reveal box-glow-hover">
+                    <div class="w-14 h-14 bg-cyber-blue/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-cyber-blue/20 transition-colors">
+                        <i class="fas fa-brain text-3xl text-cyber-blue"></i>
+                    </div>
+                    <h3 class="text-xl font-bold font-orbitron mb-3 text-white">Tư Duy Logic</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Phân tích và giải quyết vấn đề có hệ thống. Sở hữu tư duy thuật toán sắc bén, biến những vấn đề phức tạp thành các giải pháp tối ưu.
+                    </p>
+                    <div class="mt-4 w-full bg-gray-800 h-1 rounded-full overflow-hidden">
+                        <div class="bg-cyber-blue h-full w-[90%] shadow-[0_0_10px_#00f3ff]"></div>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="cyber-glass p-8 rounded-xl border border-gray-800 hover:border-cyber-blue transition-all duration-300 group reveal box-glow-hover" style="transition-delay: 100ms;">
+                    <div class="w-14 h-14 bg-cyber-purple/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-cyber-purple/20 transition-colors">
+                        <i class="fas fa-bolt text-3xl text-cyber-purple"></i>
+                    </div>
+                    <h3 class="text-xl font-bold font-orbitron mb-3 text-white">Học Hỏi Nhanh</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Tiếp thu công nghệ mới một cách chủ động. Khả năng tự nghiên cứu sâu rộng, không ngại thử thách với các stack công nghệ lạ.
+                    </p>
+                    <div class="mt-4 w-full bg-gray-800 h-1 rounded-full overflow-hidden">
+                        <div class="bg-cyber-purple h-full w-[95%] shadow-[0_0_10px_#bc13fe]"></div>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="cyber-glass p-8 rounded-xl border border-gray-800 hover:border-cyber-blue transition-all duration-300 group reveal box-glow-hover" style="transition-delay: 200ms;">
+                    <div class="w-14 h-14 bg-green-500/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-green-500/20 transition-colors">
+                        <i class="fas fa-mountain text-3xl text-green-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold font-orbitron mb-3 text-white">Kiên Trì & Nỗ Lực</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Không bỏ cuộc khi gặp bug hay bài toán khó. Luôn tìm cách vượt qua giới hạn của bản thân để hoàn thành mục tiêu.
+                    </p>
+                    <div class="mt-4 w-full bg-gray-800 h-1 rounded-full overflow-hidden">
+                        <div class="bg-green-400 h-full w-[100%] shadow-[0_0_10px_#4ade80]"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="py-20 bg-cyber-black/50 border-y border-gray-800 relative">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex items-center justify-end mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-orbitron font-bold text-white text-right">CHỨNG CHỈ <span class="text-cyber-blue text-xl">// ACHIEVEMENTS</span></h2>
+                <span class="w-12 h-1 bg-cyber-purple ml-4"></span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Certificate Card -->
+                <div class="relative group reveal">
+                    <div class="absolute inset-0 bg-gradient-to-r from-cyber-blue to-cyber-purple opacity-0 group-hover:opacity-100 blur transition-opacity duration-500"></div>
+                    <div class="relative h-full cyber-glass p-6 border border-gray-700 flex flex-col items-center text-center clip-corner bg-gray-900">
+                        <div class="text-5xl font-black font-orbitron text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-500 mb-2">9.0</div>
+                        <div class="text-cyber-blue font-bold tracking-widest text-lg mb-4">IELTS</div>
+                        <p class="text-gray-400 text-xs">Thành thạo tiếng Anh học thuật và giao tiếp chuyên nghiệp.</p>
+                        <i class="fas fa-language text-gray-600 absolute top-4 right-4 text-xl"></i>
+                    </div>
+                </div>
+
+                <!-- Certificate Card -->
+                <div class="relative group reveal" style="transition-delay: 100ms;">
+                    <div class="absolute inset-0 bg-gradient-to-r from-green-400 to-blue-500 opacity-0 group-hover:opacity-100 blur transition-opacity duration-500"></div>
+                    <div class="relative h-full cyber-glass p-6 border border-gray-700 flex flex-col items-center text-center clip-corner bg-gray-900">
+                        <div class="text-5xl font-black font-orbitron text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-500 mb-2">MOS</div>
+                        <div class="text-green-400 font-bold tracking-widest text-lg mb-4">EXPERT</div>
+                        <p class="text-gray-400 text-xs">Microsoft Office Specialist Expert. Kỹ năng tin học văn phòng đỉnh cao.</p>
+                        <i class="fab fa-microsoft text-gray-600 absolute top-4 right-4 text-xl"></i>
+                    </div>
+                </div>
+
+                <!-- Certificate Card -->
+                <div class="relative group reveal" style="transition-delay: 200ms;">
+                    <div class="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-500 opacity-0 group-hover:opacity-100 blur transition-opacity duration-500"></div>
+                    <div class="relative h-full cyber-glass p-6 border border-gray-700 flex flex-col items-center text-center clip-corner bg-gray-900">
+                        <div class="text-5xl font-black font-orbitron text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-500 mb-2">8.2</div>
+                        <div class="text-yellow-400 font-bold tracking-widest text-lg mb-4">GPA</div>
+                        <p class="text-gray-400 text-xs">Điểm trung bình tích lũy xuất sắc tại PTIT.</p>
+                        <i class="fas fa-graduation-cap text-gray-600 absolute top-4 right-4 text-xl"></i>
+                    </div>
+                </div>
+
+                 <!-- Placeholder for future -->
+                 <div class="relative group reveal" style="transition-delay: 300ms;">
+                    <div class="relative h-full border border-dashed border-gray-700 flex flex-col items-center justify-center text-center p-6 bg-transparent hover:bg-gray-800/30 transition-colors cursor-pointer">
+                        <i class="fas fa-plus text-3xl text-gray-600 mb-2 group-hover:text-cyber-blue transition-colors"></i>
+                        <span class="text-gray-500 font-rajdhani">LOADING NEXT...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Growth / Weaknesses Section -->
+    <section id="growth" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row gap-12">
+                <div class="md:w-1/3 reveal">
+                    <h2 class="text-3xl md:text-4xl font-orbitron font-bold text-white mb-6">MỤC TIÊU <br><span class="text-cyber-purple">CẢI THIỆN</span></h2>
+                    <p class="text-gray-400 leading-relaxed mb-6">
+                        "Biết mình biết ta, trăm trận trăm thắng". Tôi nhận thức rõ những điểm cần khắc phục và đang thực hiện roadmap cụ thể để hoàn thiện bản thân mỗi ngày.
+                    </p>
+                    <div class="w-20 h-20 border-4 border-l-cyber-blue border-t-cyber-purple border-r-gray-700 border-b-gray-700 rounded-full flex items-center justify-center animate-spin">
+                        <i class="fas fa-sync text-white text-xl animate-[spin_1s_linear_infinite_reverse]"></i>
+                    </div>
+                </div>
+
+                <div class="md:w-2/3 space-y-6">
+                    <!-- Growth Item 1 -->
+                    <div class="reveal p-6 border-l-2 border-red-500 bg-gradient-to-r from-red-500/10 to-transparent hover:from-red-500/20 transition-all">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-white font-orbitron"><i class="fas fa-clock mr-2 text-red-400"></i> Quản Lý Thời Gian</h3>
+                            <span class="text-xs font-mono bg-red-500/20 text-red-300 px-2 py-1 rounded">PROCESSING...</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-3">Đôi khi còn gặp khó khăn trong việc cân bằng giữa học tập và đam mê cá nhân.</p>
+                        <div class="text-sm text-gray-300">
+                            <span class="text-cyber-blue font-bold">Giải pháp:</span> Áp dụng Pomodoro, sử dụng Notion để tracking task, ưu tiên công việc theo ma trận Eisenhower.
+                        </div>
+                    </div>
+
+                    <!-- Growth Item 2 -->
+                    <div class="reveal p-6 border-l-2 border-yellow-500 bg-gradient-to-r from-yellow-500/10 to-transparent hover:from-yellow-500/20 transition-all" style="transition-delay: 100ms;">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-white font-orbitron"><i class="fas fa-microphone mr-2 text-yellow-400"></i> Kỹ Năng Thuyết Trình</h3>
+                            <span class="text-xs font-mono bg-yellow-500/20 text-yellow-300 px-2 py-1 rounded">LOADING...</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-3">Chưa thực sự tự tin khi trình bày ý tưởng trước đám đông lớn.</p>
+                        <div class="text-sm text-gray-300">
+                            <span class="text-cyber-blue font-bold">Giải pháp:</span> Tham gia CLB công nghệ tại PTIT, chủ động nhận slot báo cáo bài tập nhóm, luyện tập nói trước gương.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contact -->
+    <footer id="contact" class="bg-cyber-dark pt-16 pb-8 border-t border-gray-800 relative overflow-hidden">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-2xl font-orbitron font-bold text-white mb-8">KẾT NỐI VỚI <span class="text-cyber-blue text-glow">KHANG</span></h2>
+            
+            <div class="flex justify-center gap-6 mb-12">
+                <a href="#" class="w-12 h-12 flex items-center justify-center rounded bg-gray-800 hover:bg-blue-600 hover:text-white transition-all transform hover:-translate-y-2 box-glow">
+                    <i class="fab fa-facebook-f text-xl"></i>
+                </a>
+                <a href="#" class="w-12 h-12 flex items-center justify-center rounded bg-gray-800 hover:bg-gray-900 hover:text-white transition-all transform hover:-translate-y-2 box-glow border border-gray-700">
+                    <i class="fab fa-github text-xl"></i>
+                </a>
+                <a href="#" class="w-12 h-12 flex items-center justify-center rounded bg-gray-800 hover:bg-blue-500 hover:text-white transition-all transform hover:-translate-y-2 box-glow">
+                    <i class="fab fa-linkedin-in text-xl"></i>
+                </a>
+                <a href="mailto:contact@nguyenngockhang.dev" class="w-12 h-12 flex items-center justify-center rounded bg-gray-800 hover:bg-red-500 hover:text-white transition-all transform hover:-translate-y-2 box-glow">
+                    <i class="fas fa-envelope text-xl"></i>
+                </a>
+            </div>
+
+            <p class="text-gray-600 text-sm font-rajdhani">
+                © 2024 Nguyễn Ngọc Khang. Designed with <span class="text-red-500">♥</span> & Cyberpunk Spirit.
+            </p>
+            <p class="text-gray-700 text-xs mt-2">Student at Posts and Telecommunications Institute of Technology</p>
+        </div>
+        
+        <!-- Decoration Grid Bottom -->
+        <div class="absolute bottom-0 w-full h-1 bg-gradient-to-r from-transparent via-cyber-blue to-transparent"></div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Scroll Reveal Animation
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        // Trigger once on load
+        reveal();
+
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+            } else {
+                menu.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
